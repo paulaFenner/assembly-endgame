@@ -1,0 +1,15 @@
+:root {
+  --font-main: 'Hanken Grotesk', Arial, sans-serif;
+
+  --color-bkg-black: #262626;
+  --color-bkg-grey: #f5f5f5;
+
+  --color-white: #f9f4da;
+  --color-black: #2b283a;
+  --color-grey: #8e8e8e;
+
+  --color-grey-dark: #4a4e74;
+  --color-accent-green: #10a95b;
+  --color-accent-purple: #7a5ea7;
+  --color-accent-red: #ba2a2a;
+}

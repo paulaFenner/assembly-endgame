@@ -1,0 +1,20 @@
+@import url(./styles/variables.css);
+@import url(./styles/header.css);
+@import url(./styles/status.css);
+@import url(./styles/languages.css);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--color-bkg-black);
+  color: var(--color-white);
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

@@ -1,0 +1,11 @@
+/* TYPOGRAPHY */
+h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+header > p {
+  font-size: 0.875rem;
+  max-width: 350px;
+  color: var(--color-grey);
+}
