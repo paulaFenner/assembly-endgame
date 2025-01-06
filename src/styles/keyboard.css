@@ -1,0 +1,14 @@
+.keyboard {
+  margin: 4em auto;
+}
+
+.keyboard-key {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  min-width: 40px;
+  min-height: 40px;
+  margin: 0.2em;
+  background-color: var(--color-accent-yellow);
+  border: 1px solid var(--color-bkg-grey);
+  border-radius: 6px;
+}

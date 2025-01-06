@@ -1,0 +1,16 @@
+section.word {
+  margin: 2.25em auto;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+section.word > span {
+  padding: 0.8em;
+  background-color: #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.125rem;
+  border-bottom: 1px solid #f9f4da;
+}
