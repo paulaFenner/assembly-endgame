@@ -1,8 +1,8 @@
 .keyboard {
-  margin: 4em auto;
+  margin: 4em auto 2em auto;
 }
 
-.keyboard-key {
+section.keyboard > button {
   font-family: var(--font-main);
   font-size: 1rem;
   min-width: 40px;
@@ -11,4 +11,13 @@
   background-color: var(--color-accent-yellow);
   border: 1px solid var(--color-bkg-grey);
   border-radius: 6px;
+  cursor: pointer;
+}
+
+section.keyboard > button.correct {
+  background-color: #10a95b;
+}
+
+section.keyboard > button.wrong {
+  background-color: #ec5d49;
 }
