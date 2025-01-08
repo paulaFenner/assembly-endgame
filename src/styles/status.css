@@ -4,9 +4,7 @@
   min-height: 60px;
   margin: 1.25em 3.5em;
   padding: 1.25em;
-
   border-radius: 4px;
-  /* border: 1px dashed #323232; */
 }
 
 .status-container.won {
@@ -15,6 +13,11 @@
 
 .status-container.lost {
   background-color: var(--color-accent-red);
+}
+
+.status-container.farewell {
+  background-color: var(--color-accent-purple);
+  border: 1px dashed #323232;
 }
 
 h2 {
@@ -27,4 +30,9 @@ h2 {
 p {
   margin: 0;
   font-size: 1rem;
+}
+
+section.game-status > p.farewell-message {
+  font-style: italic;
+  font-weight: 400;
 }

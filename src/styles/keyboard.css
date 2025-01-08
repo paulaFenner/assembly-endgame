@@ -21,3 +21,9 @@ section.keyboard > button.correct {
 section.keyboard > button.wrong {
   background-color: #ec5d49;
 }
+
+button:disabled {
+  opacity: 0.5; /* Make the button semi-transparent */
+  cursor: not-allowed; /* Change the cursor to indicate the button is disabled */
+  background-color: #ccc;
+}

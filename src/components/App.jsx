@@ -14,6 +14,9 @@ export default function App() {
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
 
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter);
+
   const letters = currentWord
     .split('')
     .map((letter, index) => <span key={index}>{guessedLetters.includes(letter) ? letter.toUpperCase() : ''}</span>);
@@ -25,10 +28,17 @@ export default function App() {
   return (
     <main>
       <Header />
-      <Status won={isGameWon} lost={isGameLost} over={isGameOver} />
+      <Status
+        won={isGameWon}
+        lost={isGameLost}
+        over={isGameOver}
+        isLastGuessIncorrect={isLastGuessIncorrect}
+        wrongGuessCount={wrongGuessCount}
+        languages={languages}
+      />
       <Languages wrongGuessCount={wrongGuessCount} />
       <section className="word">{letters}</section>
-      <Keyboard addLetter={addLetter} currentWord={currentWord} guessedLetters={guessedLetters} />
+      <Keyboard addLetter={addLetter} currentWord={currentWord} guessedLetters={guessedLetters} over={isGameOver} />
       {isGameOver && <button className="new-game">New Game</button>}
     </main>
   );
