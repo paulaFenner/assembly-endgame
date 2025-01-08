@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { languages } from '../languages';
 import Header from './Header';
 import Status from './Status';
 import Languages from './Languages';
@@ -9,7 +10,9 @@ export default function App() {
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const wrongGuessCount = guessedLetters.filter((letter) => !currentWord.includes(letter)).length;
-  console.log(wrongGuessCount);
+  const isGameWon = currentWord.split('').every((letter) => guessedLetters.includes(letter));
+  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameOver = isGameWon || isGameLost;
 
   const letters = currentWord
     .split('')
@@ -22,11 +25,11 @@ export default function App() {
   return (
     <main>
       <Header />
-      <Status />
+      <Status won={isGameWon} lost={isGameLost} over={isGameOver} />
       <Languages wrongGuessCount={wrongGuessCount} />
       <section className="word">{letters}</section>
       <Keyboard addLetter={addLetter} currentWord={currentWord} guessedLetters={guessedLetters} />
-      <button className="new-game">New Game</button>
+      {isGameOver && <button className="new-game">New Game</button>}
     </main>
   );
 }

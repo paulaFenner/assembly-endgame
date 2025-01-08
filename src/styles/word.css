@@ -6,7 +6,8 @@ section.word {
 }
 
 section.word > span {
-  padding: 0.8em;
+  height: 40px;
+  width: 40px;
   background-color: #323232;
   display: flex;
   justify-content: center;
