@@ -9,7 +9,7 @@ export default function Status(props) {
   });
 
   return (
-    <section className={gameStatusClass}>
+    <section aria-live="polite" role="status" className={gameStatusClass}>
       {!props.over && props.isLastGuessIncorrect ? (
         <p className="farewell-message">{getFarewellText(props.languages[props.wrongGuessCount - 1].name)}</p>
       ) : props.over ? (

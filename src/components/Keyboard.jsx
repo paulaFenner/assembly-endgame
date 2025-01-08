@@ -13,7 +13,14 @@ export default function Keyboard(props) {
     });
 
     return (
-      <button className={className} key={letter} disabled={props.over} onClick={() => props.addLetter(letter)}>
+      <button
+        className={className}
+        key={letter}
+        disabled={props.over}
+        aria-disabled={props.guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
+        onClick={() => props.addLetter(letter)}
+      >
         {letter.toUpperCase()}
       </button>
     );

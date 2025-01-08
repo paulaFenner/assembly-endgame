@@ -9,9 +9,10 @@ export default function App() {
   const [currentWord, setCurrentWord] = useState('react');
   const [guessedLetters, setGuessedLetters] = useState([]);
 
+  const numGuessesLeft = languages.length - 1;
   const wrongGuessCount = guessedLetters.filter((letter) => !currentWord.includes(letter)).length;
   const isGameWon = currentWord.split('').every((letter) => guessedLetters.includes(letter));
-  const isGameLost = wrongGuessCount >= languages.length - 1;
+  const isGameLost = wrongGuessCount >= numGuessesLeft;
   const isGameOver = isGameWon || isGameLost;
 
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <main>
       <Header />
+
       <Status
         won={isGameWon}
         lost={isGameLost}
@@ -36,9 +38,30 @@ export default function App() {
         wrongGuessCount={wrongGuessCount}
         languages={languages}
       />
+
       <Languages wrongGuessCount={wrongGuessCount} />
+
       <section className="word">{letters}</section>
+
+      {/* Combined visually-hidden aria-live region for status updates */}
+      <section className="sr-only" aria-live="polite" role="status">
+        <p>
+          {currentWord.includes(lastGuessedLetter)
+            ? `Correct! The letter ${lastGuessedLetter} is in the word.`
+            : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
+          You have {numGuessesLeft} attempts left.
+        </p>
+        <p>
+          Current word:{' '}
+          {currentWord
+            .split('')
+            .map((letter) => (guessedLetters.includes(letter) ? letter + '.' : 'blank.'))
+            .join(' ')}
+        </p>
+      </section>
+
       <Keyboard addLetter={addLetter} currentWord={currentWord} guessedLetters={guessedLetters} over={isGameOver} />
+
       {isGameOver && <button className="new-game">New Game</button>}
     </main>
   );
