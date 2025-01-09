@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { languages } from '../languages';
 import { getRandomWord } from '../utils';
+import { clsx } from 'clsx';
 import Header from './Header';
 import Status from './Status';
 import Languages from './Languages';
@@ -11,6 +12,19 @@ export default function App() {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
+  // Handle window resizing
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const numGuessesLeft = languages.length - 1;
   const wrongGuessCount = guessedLetters.filter((letter) => !currentWord.includes(letter)).length;
   const isGameWon = currentWord.split('').every((letter) => guessedLetters.includes(letter));
@@ -20,9 +34,15 @@ export default function App() {
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
   const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter);
 
-  const letters = currentWord
-    .split('')
-    .map((letter, index) => <span key={index}>{guessedLetters.includes(letter) ? letter.toUpperCase() : ''}</span>);
+  const letters = currentWord.split('').map((letter, index) => {
+    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
+    const letterClassName = clsx(isGameLost && !guessedLetters.includes(letter) && 'missed-letter');
+    return (
+      <span key={index} className={letterClassName}>
+        {shouldRevealLetter ? letter.toUpperCase() : ''}
+      </span>
+    );
+  });
 
   function addLetter(letter) {
     setGuessedLetters((prevLetters) => (prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]));
@@ -35,7 +55,7 @@ export default function App() {
 
   return (
     <main>
-      {isGameWon && <Confetti />}
+      {isGameWon && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={1000} />}
 
       <Header />
 

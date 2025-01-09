@@ -16,6 +16,10 @@ section.word > span {
   border-bottom: 1px solid #f9f4da;
 }
 
+section.word > span.missed-letter {
+  color: var(--color-accent-red);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
