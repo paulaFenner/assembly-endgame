@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { languages } from '../languages';
+import { getRandomWord } from '../utils';
 import Header from './Header';
 import Status from './Status';
 import Languages from './Languages';
 import Keyboard from './Keyboard';
+import Confetti from 'react-confetti';
 
 export default function App() {
-  const [currentWord, setCurrentWord] = useState('react');
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
 
   const numGuessesLeft = languages.length - 1;
@@ -26,8 +28,15 @@ export default function App() {
     setGuessedLetters((prevLetters) => (prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]));
   }
 
+  function startNewGame() {
+    setCurrentWord(getRandomWord());
+    setGuessedLetters([]);
+  }
+
   return (
     <main>
+      {isGameWon && <Confetti />}
+
       <Header />
 
       <Status
@@ -62,7 +71,11 @@ export default function App() {
 
       <Keyboard addLetter={addLetter} currentWord={currentWord} guessedLetters={guessedLetters} over={isGameOver} />
 
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && (
+        <button className="new-game" onClick={startNewGame}>
+          New Game
+        </button>
+      )}
     </main>
   );
 }
